@@ -1,0 +1,81 @@
+{
+  "name": "micro-hub",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "packages/micro-hub/src",
+  "prefix": "micro-hub",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/micro-hub",
+        "index": "packages/micro-hub/src/index.html",
+        "main": "packages/micro-hub/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "packages/micro-hub/tsconfig.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "packages/micro-hub/src/favicon.ico",
+          "packages/micro-hub/src/assets"
+        ],
+        "styles": ["packages/micro-hub/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "micro-hub:build:production"
+        },
+        "development": {
+          "browserTarget": "micro-hub:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "micro-hub:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "packages/micro-hub/**/*.ts",
+          "packages/micro-hub/**/*.html"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <h1>Micro Hub</h1>
+  <button
+    [ngClass]="vm.connected ? 'disconnect' : 'connect'"
+    (click)="vm.connected ? disconnect($event) : connect($event)"
+  >
+    {{ vm.connected ? 'Disconnect' : 'Connect' }}
+  </button>
+  <google-chart
+    *ngIf="vm.connected && vm.chartData.length > 0"
+    [type]="vm.chartType"
+    [columns]="[
+      { type: 'string', label: '' },
+      { type: 'number', label: 'Temperature' }
+    ]"
+    [data]="vm.chartData"
+    [dynamicResize]="true"
+  ></google-chart>
+  <span *ngIf="vm.connected" class="click-events"
+    >Click Events: {{ vm.clickEvents.length }}</span
+  >
+</ng-container>

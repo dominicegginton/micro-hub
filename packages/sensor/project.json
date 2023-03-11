@@ -1,0 +1,45 @@
+{
+  "name": "sensor",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "targets": {
+    "install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npm install",
+          "npx pxt target microbit",
+          "npx pxt install"
+        ],
+        "cwd": "packages/sensor",
+        "parallel": false
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx pxt build",
+        "cwd": "packages/sensor"
+      },
+      "dependsOn": [
+        {
+          "target": "install",
+          "projects": "self"
+        }
+      ]
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx pxt deploy",
+        "cwd": "packages/sensor"
+      },
+      "dependsOn": [
+        {
+          "target": "build",
+          "projects": "self"
+        }
+      ]
+    }
+  }
+}

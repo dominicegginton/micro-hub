@@ -1,0 +1,9 @@
+{
+  "name": "sensor",
+  "dependencies": {
+    "pxt-microbit": "^5.1.6"
+  },
+  "devDependencies": {
+    "pxt": "0.5.1"
+  }
+}
